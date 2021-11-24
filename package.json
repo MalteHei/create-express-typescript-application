@@ -1,47 +1,32 @@
 {
-  "name": "create-express-typescript-application",
-  "version": "2.2.7",
-  "description": "Create a new lightweight Express application with TypeScript",
-  "main": "index.js",
-  "scripts": {
-    "create-express-typescript-application": "node index.js",
-    "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "app:dev": "cd create-express-typescript-application-sample && npm run dev",
-    "install:all": "concurrently \"npm i\" \"npm run install:ceta\"",
-    "install:ceta": "cd create-express-typescript-application-sample && npm i",
-    "precleanup": "rimraf ./create-express-typescript-application-sample/node_modules && rimraf ./create-express-typescript-application-sample/package-lock.json ",
-    "cleanup": "rimraf ./create-express-typescript-application-prisma-sample/node_modules && rimraf ./create-express-typescript-application-prisma-sample/package-lock.json && rimraf ./create-express-typescript-application-prisma-sample/prisma/migrations && rimraf ./create-express-typescript-application-prisma-sample/prisma/dev.db && rimraf ./create-express-typescript-application-prisma-sample/build ",
-    "deploy": "npm run cleanup && npm publish"
-  },
-  "bin": {
-    "create-express-typescript-application": "index.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/PrawiraGenestonlia/create-express-typescript-application.git"
-  },
+  "name": "express-ts-app",
+  "version": "1.0.0",
+  "description": "Create a very basic Express application with TypeScript enabled",
+  "author": "Malte Heidemann",
+  "license": "MIT",
   "keywords": [
+    "create",
+    "generate",
+    "generator",
     "express",
     "typescript",
-    "app",
-    "create",
-    "generator",
-    "ex",
-    "generate",
-    "types",
     "ts",
-    "express-ts",
-    "router",
-    "api",
-    "structure"
+    "app",
+    "application"
   ],
-  "author": "Prawira Genestonlia",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/PrawiraGenestonlia/create-express-typescript-application/issues"
+  "bin": {
+    "express-ts-app": "index.js"
   },
-  "homepage": "https://github.com/PrawiraGenestonlia/create-express-typescript-application#readme",
+  "homepage": "https://github.com/MalteHei/create-express-typescript-application#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MalteHei/create-express-typescript-application.git"
+  },
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "deploy": "npm publish"
+  },
   "dependencies": {
     "child_process": "^1.0.2",
     "commander": "^7.0.0",
