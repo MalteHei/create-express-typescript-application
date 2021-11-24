@@ -15,35 +15,20 @@ const execSync = require('child_process').execSync;
 const ncp = require('ncp').ncp;
 
 const handleExit = () => {
-    console.log('Exiting without error.');
-    process.exit();
+    process.exit(0);
 };
 
 const handleError = e => {
     console.error('ERROR! An error was encountered while executing');
     console.error(e);
-    console.log('Exiting with error.');
     process.exit(1);
 };
 
 process.on('SIGINT', handleExit);
 process.on('uncaughtException', handleError);
 
-/**
- * Copy project files
- * 
- * @param folderDestination 
- */
-const copyProjectFiles = (folderDestination, type) => {
-    let originalFolder = '';
-
-    if (type === 'prisma') {
-        originalFolder = './create-express-typescript-application-prisma-sample';
-    } else if (type === 'plain') {
-        originalFolder = './create-express-typescript-application-sample';
-    } else if (type === 'typeorm') {
-        originalFolder = './create-express-typescript-application-typeorm-sample';
-    }
+const copyProjectFiles = (folderDestination) => {
+    const originalFolder = './template';
 
     const source = path.join(__dirname, originalFolder);
     return new Promise((resolve, reject) => {
@@ -57,40 +42,22 @@ const copyProjectFiles = (folderDestination, type) => {
     })
 }
 
-/**
- * Set project name in package.json
- * @param projectName 
- */
 const updatePackageJson = (projectName) => {
-    let file = editJsonFile(projectName + '/package.json', {
-        autosave: true
-    });
+    let file = editJsonFile(projectName + '/package.json', { autosave: true });
     file.set('name', path.basename(projectName));
-    file.set('description', path.basename(projectName) + " initialised with create-express-typescript-application.");
-
 }
 
-/**
- * Get all the dependencies
- */
 const getDepStrings = () => {
-    const dependencies = 'cors express fs helmet morgan env-cmd';
-    const devDependencies = '@types/cors @types/express @types/morgan @types/node @typescript-eslint/parser ' +
-        '@typescript-eslint/eslint-plugin eslint nodemon ts-node typescript'
+    const dependencies = 'cors express';
+    const devDependencies = '@types/cors @types/express @types/node nodemon ts-node typescript';
     return { dependencies, devDependencies };
 }
 
-/**
- * Download the dependencies.
- * @param folderPath 
- * @param d
- */
-const downloadNodeModules = (folderPath, d) => {
+const downloadNodeModules = (folderPath, deps) => {
     const options = { cwd: folderPath };
-    childProcess.execSync('npm i -s ' + d.dependencies, options);
-    childProcess.execSync('npm i -D ' + d.devDependencies, options);
+    childProcess.execSync('npm i -s ' + deps.dependencies, options);
+    childProcess.execSync('npm i -D ' + deps.devDependencies, options);
     childProcess.execSync('npm i', options);
-
 }
 
 const checkGitIgnore = (appPath) => {
@@ -110,8 +77,6 @@ const checkGitIgnore = (appPath) => {
         );
     }
 }
-
-
 
 const isInGitRepository = (folderPath) => {
     try {
@@ -143,33 +108,23 @@ const tryGitCommit = (folderPath) => {
     try {
         const options = { cwd: folderPath, stdio: 'ignore' };
         execSync('git add .', options);
-        execSync('git commit -m "Initialize project using create-express-typescript-application"', options);
+        execSync('git commit -m "initial commit"', options);
         return true;
     } catch (e) {
-        // We couldn't commit in already initialized git repo,
-        // maybe the commit author config is not set.
-        // In the future, we might supply our own committer
-        // like Ember CLI does, but for now, let's just
-        // remove the Git files to avoid a half-done state.
         console.warn('Git commit not created', e);
         console.warn('Removing .git directory...');
         try {
-            // unlinkSync() doesn't work on directories.
             fs.removeSync(path.join(appPath, '.git'));
         } catch (removeErr) {
-            // Ignore.
+            // ignore
         }
         return false;
     }
 }
 
-/**
- * Entry point
- * @param folderName 
- */
-const generateApp = async (folderName, type = 'plain') => {
+const generateApp = async (folderName) => {
     try {
-        await copyProjectFiles(folderName, type);
+        await copyProjectFiles(folderName);
         updatePackageJson(folderName);
         downloadNodeModules(folderName, getDepStrings());
         checkGitIgnore(folderName);
