@@ -2,7 +2,7 @@
 
 > Forked from [PrawiraGenestonlia/create-express-typescript-application](https://github.com/PrawiraGenestonlia/create-express-typescript-application)
 
-_express-ts-app_ creates a very basic Express application with TypeScript enabled.
+_express-ts-app_ creates a very basic Express application with TypeScript enabled, see [template](template).
 
 ## Quick Start
 
