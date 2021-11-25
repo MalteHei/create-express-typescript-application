@@ -7,8 +7,11 @@ const { version } = require('./package.json');
 const generateApp = require('./helper');
 
 const program = new Command();
-program.version(version);
-program.parse(process.argv);
+program
+    .name('express-ts-app')
+    .usage('PROJECT_NAME [OPTION]')
+    .version(version)
+    .parse(process.argv);
 
 const options = program.opts();
 if (options.debug) console.log(options);
