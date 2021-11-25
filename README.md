@@ -10,7 +10,7 @@ _express-ts-app_ creates a very basic Express application with TypeScript enable
 # create a project
 $ npx express-ts-app <project-name>
 # start the server
-$ cd <project-name> && npm run start
+$ cd <project-name> && npm run dev
 ```
 
 ## Usage
@@ -25,9 +25,10 @@ Options:
 
 ## Available commands for the created application
 
-- `npm run dev`: Run TypeScript directly
+- `npm run dev`: Run TypeScript directly (hot-reload)
+- `npm start:ts`: Run TypeScript directly
+- `npm start`: Run compiled JavaScript
 - `npm run build`: Compile TypeScript to JavaScript
-- `npm start`: Run the compiled JavaScript
 
 ## License
 
