@@ -1,14 +1,14 @@
 {
-  "name": "template-app",
-  "version": "0.0.1",
-  "main": "src/index.ts",
-  "scripts": {
-    "build": "tsc",
-    "prestart": "npm run build",
-    "start": "node ./target/src/index.js",
-    "start:js": "npm run start",
-    "start:ts": "ts-node ./src/index.ts",
-    "dev": "nodemon -w src -e ts,json -x ts-node ./src/index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  }
+	"name": "template-app",
+	"version": "0.0.1",
+	"main": "src/index.ts",
+	"scripts": {
+		"build": "tsc",
+		"prestart": "npm run build",
+		"start": "node ./target/index.js",
+		"start:js": "npm run start",
+		"start:ts": "ts-node ./src/index.ts",
+		"dev": "nodemon -w src -e ts,json -x ts-node ./src/index.ts",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	}
 }
