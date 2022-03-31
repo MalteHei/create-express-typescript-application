@@ -8,17 +8,17 @@ const generateApp = require('./helper');
 
 const program = new Command();
 program
-    .name('express-ts-app')
-    .usage('PROJECT_NAME [OPTION]')
-    .version(version)
-    .parse(process.argv);
+	.name('express-ts-app')
+	.usage('PROJECT_NAME [OPTION]')
+	.version(version)
+	.parse(process.argv);
 
 const options = program.opts();
 if (options.debug) console.log(options);
 
 if (program.args.length !== 1) {
-    console.error('Wrong number of arguments!');
-    process.exit(1);
+	console.error('Wrong number of arguments!');
+	process.exit(1);
 }
 
 console.log('Creating app...');
@@ -26,6 +26,6 @@ console.log('Creating app...');
 const projectName = program.args[0];
 
 generateApp(projectName).then(() => {
-    console.log(`${projectName} has been created!`);
-    console.log(`Edit ${projectName}/src/index.ts to add routes to your application.`);
+	console.log(`${projectName} has been created!`);
+	console.log(`Edit ${projectName}/src/index.ts to add routes to your application.`);
 });
